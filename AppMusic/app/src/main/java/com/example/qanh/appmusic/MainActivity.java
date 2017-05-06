@@ -1,31 +1,20 @@
 package com.example.qanh.appmusic;
 
-import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.media.MediaMetadataRetriever;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class MainActivity extends ActionBarActivity implements Fragment1.OnDataPass1,Fragment2.OnDataPass2,View.OnClickListener, SeekBar.OnSeekBarChangeListener,MusicPlayer.OnCompletionListener{
@@ -53,10 +42,19 @@ public class MainActivity extends ActionBarActivity implements Fragment1.OnDataP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*//Không hiện tiêu đề
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //Hiện nút back
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+
         getId();
         initList();
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        return true;
+    }
     private void initList() {
         mPagerAdapter = new PagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mPagerAdapter);
@@ -86,22 +84,8 @@ public class MainActivity extends ActionBarActivity implements Fragment1.OnDataP
         mProcess.setOnSeekBarChangeListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    //Phương thúc lọc khi search
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.itClock) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void khiClickVaoItemListView(int postion, ArrayList<String> mPathListSong) {
@@ -220,6 +204,7 @@ public class MainActivity extends ActionBarActivity implements Fragment1.OnDataP
         }).start();
 
     }
+    // Format thời gian về h , p ,s
     private String getTimeFormat(long time) {
         String tm = "";
         int s;
