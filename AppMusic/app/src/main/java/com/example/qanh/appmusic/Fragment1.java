@@ -49,13 +49,13 @@ public class Fragment1 extends Fragment implements SearchView.OnQueryTextListene
         setHasOptionsMenu(true);
         return view;
     }
-
+   
     private void initList() {
+    	// Get danh sach bai hat tu bo nho
         mPaths = findSongs(Environment.getExternalStorageDirectory());
         mPathNameSongs = new ArrayList<String>();
         for (int i = 0; i < mPaths.size(); i++) {
             mPathNameSongs.add(mPaths.get(i).getAbsolutePath().toString());
-            //Toast.makeText(getApplicationContext(),pathNameSongs.get(i),Toast.LENGTH_SHORT).show();
         }
 
 

@@ -35,6 +35,7 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {
             e.printStackTrace();
         }
     }
+    // Lay tong thoi gian cua bai hat 
     public int getTimeTotal() {
         return mediaPlayer.getDuration() / 1000;
     }
